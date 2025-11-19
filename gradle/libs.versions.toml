@@ -1,0 +1,70 @@
+[versions]
+jvm = "2.2.20"
+ktor = "3.1.2"
+arrow = "2.2.0"
+exposed = "0.57.0"
+testcontainers = "1.20.6"
+mockk = "1.13.17"
+kotest = "6.0.0"
+postgresql = "42.7.4"
+hikari = "6.2.1"
+
+[libraries]
+# Core functional programming
+arrow_core = { group = "io.arrow-kt", name = "arrow-core", version.ref = "arrow" }
+
+# Database
+exposed_core = { group = "org.jetbrains.exposed", name = "exposed-core", version.ref = "exposed" }
+exposed_jdbc = { group = "org.jetbrains.exposed", name = "exposed-jdbc", version.ref = "exposed" }
+exposed_java_time = { group = "org.jetbrains.exposed", name = "exposed-java-time", version.ref = "exposed" }
+postgresql = { group = "org.postgresql", name = "postgresql", version.ref = "postgresql" }
+hikari = { group = "com.zaxxer", name = "HikariCP", version.ref = "hikari" }
+
+# Ktor Server
+ktor_server_core_jvm = { group = "io.ktor", name = "ktor-server-core-jvm", version.ref = "ktor" }
+ktor_server_netty_jvm = { group = "io.ktor", name = "ktor-server-netty-jvm", version.ref = "ktor" }
+ktor_server_host_common_jvm = { group = "io.ktor", name = "ktor-server-host-common-jvm", version.ref = "ktor" }
+ktor_serialization_kotlinx_json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor_server_content_negotiation = { group = "io.ktor", name = "ktor-server-content-negotiation", version.ref = "ktor" }
+
+# Testing
+ktor_server_test_host = { group = "io.ktor", name = "ktor-server-test-host-jvm", version.ref = "ktor" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+kotest_runner = { group = "io.kotest", name = "kotest-runner-junit5", version.ref = "kotest" }
+kotest_assertions = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
+testcontainer_postgresql = { group = "org.testcontainers", name = "postgresql", version.ref = "testcontainers" }
+kotlinx_coroutines_test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version = "1.7.3" }
+slf4j_simple = { group = "org.slf4j", name = "slf4j-simple", version = "2.0.7" }
+[bundles]
+ktor-server = [
+    "ktor_server_core_jvm",
+    "ktor_server_netty_jvm",
+    "ktor_server_host_common_jvm",
+    "ktor_serialization_kotlinx_json",
+    "ktor_server_content_negotiation",
+]
+
+arrow = [
+    "arrow_core"
+]
+
+database = [
+    "exposed_core",
+    "exposed_jdbc",
+    "exposed_java_time",
+    "postgresql",
+    "hikari"
+]
+
+testing = [
+    "ktor_server_test_host",
+    "mockk",
+    "kotest_runner",
+    "kotest_assertions",
+    "testcontainer_postgresql",
+    "kotlinx_coroutines_test",
+    "slf4j_simple"
+]
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jvm" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "jvm" }
